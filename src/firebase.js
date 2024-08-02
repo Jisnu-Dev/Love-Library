@@ -1,6 +1,5 @@
-// firebase.js
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth'; // Import Firebase Auth module if you're using it
+import { initializeApp } from 'firebase/app';
+import { getAuth, FacebookAuthProvider, signInWithPopup } from 'firebase/auth'; // Import specific functions from auth module
 
 // Your Firebase configuration
 const firebaseConfig = {
@@ -14,7 +13,20 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const firebaseApp = firebase.initializeApp(firebaseConfig);
+const firebaseApp = initializeApp(firebaseConfig);
+const auth = getAuth(firebaseApp); // Initialize auth from firebaseApp
+
+// Facebook Auth Provider
+const fbAuthProvider = new FacebookAuthProvider();
 
 // Export the Firebase app for use in other files
 export default firebaseApp;
+
+export const FacebookAuth = async () => {
+  try {
+    const result = await signInWithPopup(auth, fbAuthProvider);
+    return result.user;
+  } catch (error) {
+    throw error;
+  }
+};

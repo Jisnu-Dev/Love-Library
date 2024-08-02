@@ -1,6 +1,6 @@
-// SignIn.js
 import React, { useState } from 'react';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { FacebookAuth } from '../../firebase';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -10,11 +10,20 @@ const SignIn = () => {
     e.preventDefault();
 
     try {
-      const auth = getAuth(); 
+      const auth = getAuth();
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       console.log('User signed in:', userCredential.user);
     } catch (error) {
       console.error('Error signing in:', error.message);
+    }
+  };
+
+  const handleFacebookSignIn = async () => {
+    try {
+      const user = await FacebookAuth(); // Call the FacebookAuth function
+      console.log('Facebook user:', user);
+    } catch (error) {
+      console.error('Error signing in with Facebook:', error.message);
     }
   };
 
@@ -35,6 +44,7 @@ const SignIn = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button type="submit">Log In</button>
+        <button className='py-3 rounded' onClick={handleFacebookSignIn}>Log In with Facebook</button>
       </form>
     </div>
   );
