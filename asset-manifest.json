@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/Love-Library/static/css/main.f855e6bc.css",
+    "main.js": "/Love-Library/static/js/main.adcf637f.js",
+    "static/js/453.1af7d16d.chunk.js": "/Love-Library/static/js/453.1af7d16d.chunk.js",
+    "static/media/logo.svg": "/Love-Library/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/Love-Library/index.html",
+    "main.f855e6bc.css.map": "/Love-Library/static/css/main.f855e6bc.css.map",
+    "main.adcf637f.js.map": "/Love-Library/static/js/main.adcf637f.js.map",
+    "453.1af7d16d.chunk.js.map": "/Love-Library/static/js/453.1af7d16d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f855e6bc.css",
+    "static/js/main.adcf637f.js"
+  ]
+}
