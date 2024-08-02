@@ -1,7 +1,6 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, FacebookAuthProvider, signInWithPopup } from 'firebase/auth'; // Import specific functions from auth module
+import { getAuth, signInWithPopup, FacebookAuthProvider, GoogleAuthProvider } from 'firebase/auth'; // Import necessary Firebase modules
 
-// Your Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyCbsAe2nYAiUFtnP-6vhrTZrqcBICvUfdw",
     authDomain: "lovelibrary-806a1.firebaseapp.com",
@@ -12,19 +11,26 @@ const firebaseConfig = {
     measurementId: "G-P8KMQTEDVH"
 };
 
-// Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp); // Initialize auth from firebaseApp
 
-// Facebook Auth Provider
 const fbAuthProvider = new FacebookAuthProvider();
+const googleAuthProvider = new GoogleAuthProvider();
 
-// Export the Firebase app for use in other files
-export default firebaseApp;
+export { firebaseApp, auth, fbAuthProvider, googleAuthProvider };
 
 export const FacebookAuth = async () => {
   try {
     const result = await signInWithPopup(auth, fbAuthProvider);
+    return result.user;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const GoogleAuth = async () => {
+  try {
+    const result = await signInWithPopup(auth, googleAuthProvider);
     return result.user;
   } catch (error) {
     throw error;

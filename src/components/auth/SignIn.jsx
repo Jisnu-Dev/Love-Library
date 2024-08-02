@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { FacebookAuth } from '../../firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { FacebookAuth, GoogleAuth } from '../../firebase'; // Import FacebookAuth and GoogleAuth functions from firebase.js
+import { auth } from '../../firebase'; // Import auth from firebase.js
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -10,8 +11,7 @@ const SignIn = () => {
     e.preventDefault();
 
     try {
-      const auth = getAuth();
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(auth, email, password); // Use auth from firebase.js
       console.log('User signed in:', userCredential.user);
     } catch (error) {
       console.error('Error signing in:', error.message);
@@ -20,10 +20,19 @@ const SignIn = () => {
 
   const handleFacebookSignIn = async () => {
     try {
-      const user = await FacebookAuth(); // Call the FacebookAuth function
+      const user = await FacebookAuth(); // Call the FacebookAuth function from firebase.js
       console.log('Facebook user:', user);
     } catch (error) {
       console.error('Error signing in with Facebook:', error.message);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      const user = await GoogleAuth(); // Call the GoogleAuth function from firebase.js
+      console.log('Google user:', user);
+    } catch (error) {
+      console.error('Error signing in with Google:', error.message);
     }
   };
 
@@ -45,6 +54,7 @@ const SignIn = () => {
         />
         <button type="submit">Log In</button>
         <button className='py-3 rounded' onClick={handleFacebookSignIn}>Log In with Facebook</button>
+        <button className='py-3 rounded' onClick={handleGoogleSignIn}>Log In with Google</button>
       </form>
     </div>
   );
